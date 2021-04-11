@@ -1,10 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import { store } from './app/store';
+
+import App from './container/App';
+import configureStore from './store/configureStore';
+
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+
+var myStorage = window.localStorage;
+localStorage.setItem('BackendURL', 'http://localhost:80/php/public');
+localStorage.setItem('BackendToken', '');
+localStorage.setItem('FrontendURL', 'http://localhost:3000');
+
+const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
