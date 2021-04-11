@@ -2,6 +2,8 @@ import React from "react";
 import clsx from "clsx";
 import { Route, Link ,Redirect} from "react-router-dom";
 import { getCookie } from '../utils/cookies';
+import Clock from 'react-digital-clock';
+
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -122,11 +124,9 @@ export default function PersistentDrawerLeft() {
               ☰
             </IconButton>
             <Typography variant="h6" noWrap className={classes.title}>
-              BitCoin Exchange Platform
+              ₿itCoin Exchange Platform  💵
             </Typography>
-            <Typography variant="h6">
-              today
-            </Typography>
+            <Clock />
           </Toolbar>
         </AppBar>
         <Drawer
@@ -147,7 +147,7 @@ export default function PersistentDrawerLeft() {
           <Divider />
           <List>
             <ListItem component={Link} to="/main/home">
-              <ListItemText>👨 Home</ListItemText>
+              <ListItemText>🏠 Home</ListItemText>
             </ListItem>
             <Divider />
             <ListItem component={Link} to="/main/daw">
@@ -157,7 +157,7 @@ export default function PersistentDrawerLeft() {
               <ListItemText>💻 Buy and Sell</ListItemText>
             </ListItem>
             <ListItem component={Link} to="/main/setting">
-              <ListItemText>🎮 Setting</ListItemText>
+              <ListItemText>⚙️ Setting</ListItemText>
             </ListItem>
             <Divider />
             <ListItem >
@@ -177,18 +177,18 @@ export default function PersistentDrawerLeft() {
             <Redirect to="/main/home" />
           </Route>
           <Route path="/main/home">
-            <Home/>
+            <Home token = {token}/>
           </Route>
           <Route path="/main/daw">
-            <Daw/>
+            <Daw token = {token}/>
           </Route>
           <Route path="/main/bas">
-            <Bas/>
+            <Bas token = {token}/>
           </Route>
           <Route path="/main/setting">
-            <Setting/>
+            <Setting token = {token}/>
           </Route>
-          
+
           {/* <Redirect from="/main/*" to="/main" /> */}
           
         </main>
