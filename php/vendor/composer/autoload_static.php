@@ -24,6 +24,10 @@ class ComposerStaticInit3a0da50a982b3997b7036b7b10828aed
         array (
             'FastRoute\\' => 10,
         ),
+        'C' => 
+        array (
+            'CorsSlim\\' => 9,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -42,6 +46,10 @@ class ComposerStaticInit3a0da50a982b3997b7036b7b10828aed
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
+        'CorsSlim\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/palanik/corsslim',
         ),
     );
 

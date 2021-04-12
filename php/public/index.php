@@ -14,7 +14,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 // ------------------------------------------------------
 
-$app = new \Slim\App;
+$app = new \Slim\App();
 
 // --- Test Routes -------------------------------------------------------
 $app->get('/', function (Request $req,  Response $res, $args = []) {
@@ -39,18 +39,18 @@ $app->post('/user/login', function (Request $req, Response $res, $arg){
 });
 
 $app->post('/user/register', function (Request $req, Response $res, $arg){
-
-  try {
-    $input = $req->getParsedBody();
-    $email = $input['email'];
-    $nickname = $input['nickname'];
-    $password = $input['password'];
-    
-  }
-  catch (Exception $e){
-    return json_encode(msgPack("failed","parameters missing"));
-  }  
-  return json_encode(userRegister($email,$nickname,$password));
+	$input = $req->getParsedBody();
+	if (isset($input['email'], $input['nickname'],$input['password'],$input['address'])) {
+		$email = $input['email'];
+		$nickname = $input['nickname'];
+		$password = $input['password'];
+		$address = $input['address'];
+		return json_encode(userRegister($email,$nickname,$password,$address));
+	}
+	  else{
+		return json_encode(msgPack("failed","parameters missing"));
+	  }  
+  
 });
 
 $app->post('/user/funds/edit', function (Request $req, Response $res, $arg){
@@ -115,6 +115,7 @@ $app->post('/bc/wallet/list', function (Request $req,  Response $res, $args ) {
   try {
     $input = $req->getParsedBody();
     $token = $input['token'];
+	
   }
   catch (Exception $e){
     return json_encode(msgPack("failed","parameters missing"));
@@ -225,6 +226,16 @@ $app->post('/bc/transaction/action', function (Request $req,  Response $res, $ar
 }); 
 
 // ---------------------------------------------------------------
+$app->add(function ($req, $res, $next) {
+    $response = $next($req, $res);
+    return $response
+            ->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+});
+
+
+
 $app->run();
 
 ?>

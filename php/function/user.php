@@ -7,7 +7,7 @@ function userLogin($email,$password){
   }
 
   $token = genUuid();
-  $expire_time = getShiftedTime(0.5); // shift half hour
+  $expire_time = getShiftedTime(2); // shift 2 hours
   
   $sql = "INSERT INTO db_bitcoin.session (session_id,expire_time, user_id) VALUES ('$token','$expire_time','$user_id')";
   try {
@@ -24,13 +24,13 @@ function userLogin($email,$password){
 
 }
 
-function userRegister($email,$nickname,$password){
+function userRegister($email,$nickname,$password,$address){
   if (checkExistEmail($email)!=-1){
     return msgPack("failed","email exist");
   }
   $funds = 20; //initate with some cash
   
-  $sql = "INSERT INTO db_bitcoin.user (email,nickname,pw,funds) VALUES ('$email','$nickname','$password',$funds)";
+  $sql = "INSERT INTO db_bitcoin.user (email,nickname,pw,funds,address) VALUES ('$email','$nickname','$password',$funds,'$address')";
   try {
       $db = new db();
       $db = $db->connect();
@@ -55,7 +55,7 @@ function userInfo($token){
     $db = new db();
     $db = $db->connect();
     $stmt = $db->query( $sql );
-    $info = $stmt->fetch();    
+    $info = $stmt->fetch(PDO::FETCH_OBJ);    
     return msgPack("success",$info);
     $db = null; // clear db object
   } catch( PDOException $e ) {
@@ -144,7 +144,7 @@ function editFunds($token,$method,$amount){
     if ($user_id ==-1){
         return msgPack("failed","wrong_token");
     }
-  if (($amount) <0 || gettype($amount)!="int"){
+  if (($amount) <0 ){
     return msgPack("failed","wrong amount");
   }
   return func_editFunds($user_id,$method,$amount);

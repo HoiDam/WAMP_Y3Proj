@@ -149,7 +149,7 @@ function actionTransaction($token,$transaction_id,$action){
         $db = new db();
         $db = $db->connect();
         $stmt = $db->query( $sql );
-        $transaction = $stmt->fetch();
+        $transaction = $stmt->fetch(PDO::FETCH_OBJ);
         
         if (is_null($transaction)){
             return msgPack("failed","No transaction found");
@@ -338,7 +338,7 @@ function findPrivate($addressData){
         $db = new db();
         $db = $db->connect();
         $stmt = $db->query( $sql );
-        $privateData = $stmt->fetch();
+        $privateData = $stmt->fetch(PDO::FETCH_OBJ);
         
         if (is_null($privateData)){
             return msgPack("failed","No records");

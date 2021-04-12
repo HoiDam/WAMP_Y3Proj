@@ -29,6 +29,15 @@
       ),
       'reference' => '181d480e08d9476e61381e04a71b34dc0432e812',
     ),
+    'palanik/corsslim' => 
+    array (
+      'pretty_version' => 'v1.0.0',
+      'version' => '1.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '0f06ff5a9709ee1c831a25cda3028008d86a48eb',
+    ),
     'pimple/pimple' => 
     array (
       'pretty_version' => 'v3.2.3',
