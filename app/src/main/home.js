@@ -16,10 +16,11 @@ const Home = (props) =>{
     const [info, setInfo] = useState("")
     const [nickname , setNickname] = useState("")
 
+
+    
     const useStyles = makeStyles((theme) => ({
         root: {
             minWidth: 300,
-            height: 600,
             marginBottom: theme.spacing(2),
           },    
           title: {
@@ -68,7 +69,7 @@ const Home = (props) =>{
                         <CardHeader className={classes.title} title=" 📈 Real Time">
                         </CardHeader>
                         <CardContent >
-                            <Realtime/>
+                            {/* <Realtime/> */}
                         </CardContent>
                     </Card>
                 </Grid>
@@ -78,11 +79,12 @@ const Home = (props) =>{
                         <CardHeader className={classes.title} title=" 📰 News">
                         </CardHeader>
                         <CardContent >
-                            <News/>
+                            {/* <News/> */}
                         </CardContent>
                     </Card>
                 </Grid>
             </Grid>
+            
         </Container>
     )
 }

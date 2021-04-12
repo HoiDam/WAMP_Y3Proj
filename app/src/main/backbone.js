@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { Route, Link ,Redirect} from "react-router-dom";
-import { getCookie } from '../utils/cookies';
+import { setCookie,getCookie } from '../utils/cookies';
 import Clock from 'react-digital-clock';
 
 
@@ -15,6 +15,7 @@ import IconButton from "@material-ui/core/IconButton";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
 
 import Home from './home.js'
 import Bas from './bas.js'
@@ -90,8 +91,14 @@ export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [redir, setRedir] = React.useState(false);
 
   const token = getCookie('token')
+
+  const handleOnclick = ()=>{
+    setCookie('token',"",1)
+    setRedir(true)
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -100,13 +107,10 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  // console.log(localStorage.getItem("BackendToken"))
-  // if (localStorage.getItem("BackendToken")=="" ){
-  //   return <Redirect to="/login" />
-  // }
-  // else{
+
     return (
       <div className={classes.main}>
+         { redir ? (<Redirect to="/register"/>) : <div></div> }
         <AppBar
           position="fixed"
           className={clsx(classes.appBar, {
@@ -158,6 +162,10 @@ export default function PersistentDrawerLeft() {
             </ListItem>
             <ListItem component={Link} to="/main/setting">
               <ListItemText>⚙️ Setting</ListItemText>
+            </ListItem>
+            <Divider />
+            <ListItem >
+              <Button color="secondary" onClick={handleOnclick}>↶ Logout</Button>
             </ListItem>
             <Divider />
             <ListItem >

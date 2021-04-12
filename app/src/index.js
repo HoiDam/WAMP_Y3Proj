@@ -10,7 +10,6 @@ import * as serviceWorker from './serviceWorker';
 
 var myStorage = window.localStorage;
 localStorage.setItem('BackendURL', 'http://localhost:80/php/public');
-localStorage.setItem('BackendToken', '');
 localStorage.setItem('FrontendURL', 'http://localhost:3000');
 
 const store = configureStore();

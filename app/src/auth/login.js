@@ -42,11 +42,14 @@ const useStyles = theme => ({
 class Login extends Component {
   constructor(props) {
     super(props)
+    this.state={
+      login:false
+    }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    document.title = 'React Login';
+    document.title = 'BitCoin Exchange Platform';
   }
 
   handleSubmit = (event) =>{
@@ -63,22 +66,21 @@ class Login extends Component {
   }
 
   render() {
-    setCookie('token',"")
-    let isSuccess, message;
-    console.log(this.props.response)
+    setCookie('token',"",1)
+    let isSuccess="failed", message;
     if (this.props.response.login.hasOwnProperty('response')) {
       isSuccess = this.props.response.login.response.status;
       message = this.props.response.login.response.msg;
-      console.log(isSuccess,message);
       if (isSuccess=="success") {
-        setCookie('token', this.props.response.login.response.msg, 1);
+        this.state.login=true
+        setCookie('token', this.props.response.login.response.msg, 0.5);
       }
     }
     const {classes} = this.props;
 
     return (
       <div>
-        {!isSuccess ? <div>{message}</div> : <Redirect to='/main' />}
+        {!this.state.login ? <div></div> : <Redirect to='/main' />}
           <Container component="main" maxWidth="xs">
               <CssBaseline />
               <div className={classes.paper}>
@@ -87,9 +89,10 @@ class Login extends Component {
                 <Typography component="h1" variant="h5">
                   Log in
                 </Typography>
-                <form className={classes.form} noValidate onSubmit={this.handleSubmit}> 
+                <form className={classes.form} onSubmit={this.handleSubmit}> 
                 
                   <TextField
+                    type="email"
                     variant="outlined"
                     margin="normal"
                     required
