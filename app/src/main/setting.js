@@ -7,9 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
+
 
 import WalletTable from '../bc/wallet.js'
 
@@ -18,9 +16,7 @@ const Setting = (props) =>{
     const [info, setInfo] = useState("")
     const [walletInfo ,setWalletinfo]=useState(null)
     const useStyles = makeStyles((theme) => ({
-        addw:{
-            width:200
-        },
+
         root: {
             minHeight: 300,
             marginBottom: theme.spacing(2),
@@ -42,7 +38,21 @@ const Setting = (props) =>{
             },
       }));
     const classes = useStyles();
-    
+    const callbackFunction = () => {      
+        setWalletinfo(null)
+        getWalletInfo(token)
+    }
+    const getWalletInfo = async (token)=>{
+        const requestOptions={
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify({"token":token})
+          };
+          await fetch(localStorage.getItem("BackendURL")+"/bc/wallet/list", requestOptions)
+          .then(res => res.json())
+          .then(data=> {console.log(data) ; setWalletinfo(data.msg) })
+          .catch(error => console.log(error))
+    }
     useEffect(() => {
         const getUserInfo = async (token)=>{
             const requestOptions={
@@ -55,17 +65,7 @@ const Setting = (props) =>{
               .then(data=> {console.log(data) ; setInfo(data) })
               .catch(error => console.log(error))
         }
-        const getWalletInfo = async (token)=>{
-            const requestOptions={
-                method: "POST",
-                headers: {'Content-Type': 'application/json'},
-                body:JSON.stringify({"token":token})
-              };
-              await fetch(localStorage.getItem("BackendURL")+"/bc/wallet/list", requestOptions)
-              .then(res => res.json())
-              .then(data=> {console.log(data) ; setWalletinfo(data.msg) })
-              .catch(error => console.log(error))
-        }
+        
         getUserInfo(token)        
         getWalletInfo(token)
     },[])
@@ -103,33 +103,15 @@ const Setting = (props) =>{
                             
                         </CardHeader>
                         <CardContent >
-                            <Grid container >
-                                <Grid item xs={12} mb={2} >
-                                    <Grid container justify="flex-end">
-                                        <Button 
-                                        fullWidth
-                                        variant="contained"
-                                        color="primary"
-                                        className={classes.addw}
-                                        >
-                                        Add Wallet
-                                        </Button>
-                                    </Grid>
-                                </Grid>
-                                {walletInfo==null ? (
-                                            <div></div>
-                                        ) : (
-                                            <Grid item mt={2} xs={12} >
-                                                <WalletTable walletInfo={walletInfo} token={token}>
-            
-                                                </WalletTable>
-                                             </Grid>
-                                        )}
+                            {walletInfo==null ? (
+                                <div>Loading...</div>
+                                            ) : (
+                                <WalletTable walletInfo={walletInfo} token={token} parentCallback = {callbackFunction}>
+
+                                </WalletTable>
                                 
-                            </Grid>
-                            
-                            
-                            
+                            )}
+                           
                         </CardContent>
                     </Card>
                 </Grid>

@@ -73,7 +73,7 @@ class Login extends Component {
       message = this.props.response.login.response.msg;
       if (isSuccess=="success") {
         this.state.login=true
-        setCookie('token', this.props.response.login.response.msg, 0.5);
+        setCookie('token', this.props.response.login.response.msg, 2);
       }
     }
     const {classes} = this.props;

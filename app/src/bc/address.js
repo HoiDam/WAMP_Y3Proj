@@ -1,68 +1,18 @@
 import React, {useState, useEffect, useRef,Component} from 'react' 
 
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import { DataGrid } from '@material-ui/data-grid';
+import Modal from '@material-ui/core/Modal';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const useStyles = ((theme) => ({
-    paper: {
-      position: 'absolute',
-      width: 400,
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-    },
-  }));
-
-const columns = [
-    {
-        field: 'id',
-        hide: true,
-        identity: true
-    },
-    {
-        field: 'addressData',
-        headerName: 'Address',
-        width:200,
-    },
-    {
-        field: 'unconfirmed_balance',
-        headerName: 'Unconfirmed Balance',
-        width:200
-    },
-    {
-        field: 'balance',
-        headerName: 'Current Balance',
-        width:200
-    },
-];
-
-const rows=[
-    {
-      "addressData": "mtNBJv8Z2U9BTTWJs9SCZiUDojABotZccA",
-      "unconfirmed_balance": 0,
-      "balance": 0,
-      "id": 1
-    },
-    {
-      "addressData": "n1Ggh99KvgWoTqdv1ff1t4a3KEb8k3udgh",
-      "unconfirmed_balance": 0,
-      "balance": 0,
-      "id": 2
-    }
-  ]
+const ObjectsToCsv = require('objects-to-csv');
 
 class AddressModal extends Component {
     
@@ -76,6 +26,43 @@ class AddressModal extends Component {
       this.handleClose = this.handleClose.bind(this)
       
     }
+    columns = [
+        {
+            field: 'id',
+            hide: true,
+            identity: true
+        },
+        {
+            field: 'addressData',
+            headerName: 'Address',
+            width:420, 
+            renderCell: (params) => (
+                <strong>
+                   {(params.value)}
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    size="small"
+                    style={{ marginLeft: 16 }}
+                    onClick = {()=>{this.deleteAddress(params.value)}}
+                  >
+                    Delete
+                  </Button>
+                  
+                </strong>
+            )
+        },
+        {
+            field: 'unconfirmed_balance',
+            headerName: 'Unconfirmed Balance',
+            width:200
+        },
+        {
+            field: 'balance',
+            headerName: 'Current Balance',
+            width:200
+        },
+    ];
 
     addAddress = async (token,walletID)=>{
         const requestOptions={
@@ -83,14 +70,40 @@ class AddressModal extends Component {
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify({"token":token,"wallet_user_count":walletID})
           };
-          await fetch(localStorage.getItem("BackendURL")+"/bc/address/add", requestOptions)
-          .then(res => res.json())
-          .then(data=> {console.log(data) ;})
-          .catch(error => console.log(error))
+        await fetch(localStorage.getItem("BackendURL")+"/bc/address/add", requestOptions)
+        .then(res => res.json())
+        .then(data=> {console.log(data) ;})
+        .catch(error => console.log(error))
+        await this.getAddressInfo(this.props.token,this.props.walletID)
     }
-    
+    deleteAddress = async (address)=>{
+        const requestOptions={
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify({"token":this.props.token,"address":address,'wallet_user_count':this.props.walletID})
+          };
+        await fetch(localStorage.getItem("BackendURL")+"/bc/address/delete", requestOptions)
+        .then(res => res.json())
+        .then(data=> {console.log(data) ;})
+        .catch(error => console.log(error))
+        await this.getAddressInfo(this.props.token,this.props.walletID)
+    }
+    // detailAddress = async (address)=>{
+    //     const requestOptions={
+    //         method: "POST",
+    //         headers: {'Content-Type': 'application/json'},
+    //         body:JSON.stringify({"token":this.props.token,"address":address,'wallet_user_count':this.props.walletID})
+    //       };
+    //     const fetched = await fetch(localStorage.getItem("BackendURL")+"/bc/address/detail", requestOptions)
+    //     .then(res => res.json())
+    //     .then(data=> {console.log(data) ;})
+    //     .catch(error => console.log(error))
+    //     const f_array = [fetched]
+    //     const csv = new ObjectsToCsv(f_array);
+    //     await csv.toDisk('./test.csv');
+    // }
      
-    getAddressDetail = async (address)=>{
+    getAddressBalance = async (address)=>{
         const requestOptions={
             method: "POST",
             headers: {'Content-Type': 'application/json'},
@@ -115,7 +128,7 @@ class AddressModal extends Component {
           .then(data=> {console.log(data) ; return data.msg; })
           .catch(error => console.log(error))
         for (const row in a_array){
-            var detail = await this.getAddressDetail(a_array[row]["addressData"])
+            var detail = await this.getAddressBalance(a_array[row]["addressData"])
             // console.log(detail)
             a_array[row]["unconfirmed_balance"] = detail["unconfirmed_balance"]
             a_array[row]["balance"] = detail["balance"]
@@ -123,7 +136,7 @@ class AddressModal extends Component {
         }
         // console.log(a_array)
         this.setState({addressInfo:a_array});
-        console.log(this.state.addressInfo)
+        // console.log(this.state.addressInfo)
     }
 
     async componentDidMount() {
@@ -146,13 +159,13 @@ class AddressModal extends Component {
                 onClose={this.handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
-                contentStyle={{width: "100%", maxWidth: "none"}}
+                width="100%"
             >
                 <DialogTitle id="alert-dialog-title">{`📋 Address ${this.props.walletID}  List`}</DialogTitle>
                 <div style={{width: 800}}>
                 <DialogContent>
-                    <Grid container fixed >
-                        <Grid item xs={12} mb={2} >
+                    <Grid container  >
+                        <Grid item xs={12}>
                             <Grid container justify="flex-end">
                                 <Button 
                                 fullWidth
@@ -165,13 +178,10 @@ class AddressModal extends Component {
                             </Grid>
                         </Grid>
                         
-                        <Grid item mt={2} xs={12} >
-                        {/* <div style={{ height: 500, width: '100%' }}>
-                                <DataGrid rows={rows} columns={columns} />
-                        </div> */}
-                        {this.state.addressInfo==null? <div></div> :
+                        <Grid item xs={12} >
+                        {this.state.addressInfo==null? <div>Loading...</div> :
                             <div style={{ height: 500, width: '100%' }}>
-                                <DataGrid rows={this.state.addressInfo} columns={columns} />
+                                <DataGrid rows={this.state.addressInfo} columns={this.columns} />
                             </div>
                         }
                         
@@ -189,4 +199,4 @@ class AddressModal extends Component {
         )
     }
 }
-export default withStyles(useStyles, { withTheme: true })(AddressModal)
+export default AddressModal
