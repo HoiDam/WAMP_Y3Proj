@@ -50,7 +50,7 @@ function userInfo($token){
   if ($user_id ==-1){
     return msgPack("failed","wrong_token");
   }
-  $sql = "SELECT email , nickname , created_at , latest_pw_dt , address , icon , funds  FROM db_bitcoin.user WHERE id = '$user_id';";
+  $sql = "SELECT * FROM db_bitcoin.user WHERE id = '$user_id';";
   try {
     $db = new db();
     $db = $db->connect();

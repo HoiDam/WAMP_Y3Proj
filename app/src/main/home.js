@@ -15,12 +15,10 @@ const Home = (props) =>{
     const token = props.token //token hooked
     const [info, setInfo] = useState("")
     const [nickname , setNickname] = useState("")
-
-
     
     const useStyles = makeStyles((theme) => ({
         root: {
-            minWidth: 300,
+            Width: 500,
             marginBottom: theme.spacing(2),
           },    
           title: {
@@ -59,7 +57,7 @@ const Home = (props) =>{
     return (
         <Container >
             <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
+                <Typography component="h1" variant="h4">
                     Greetings ! {nickname} 👋
                 </Typography>
             </div>
@@ -69,7 +67,7 @@ const Home = (props) =>{
                         <CardHeader className={classes.title} title=" 📈 Real Time">
                         </CardHeader>
                         <CardContent >
-                            {/* <Realtime/> */}
+                            <Realtime/>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -79,7 +77,7 @@ const Home = (props) =>{
                         <CardHeader className={classes.title} title=" 📰 News">
                         </CardHeader>
                         <CardContent >
-                            {/* <News/> */}
+                            <News/>
                         </CardContent>
                     </Card>
                 </Grid>

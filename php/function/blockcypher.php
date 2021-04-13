@@ -43,19 +43,12 @@ function checkBelongs($address){
     }
 }
 
-function createTransaction($input){
-    try {
-        $token = $input['token'];
-        $from_address = $input["from_address"];
-        $to_address = $input["to_address"];
-        $method = $input["method"];
-        $bitcoin_amount = $input["bitcoin_amount"];
-        $fund_amount = $input["fund_amount"];
-        $current = getCurrentTime();
-    }
-    catch (Exception $e){
-        return msgPack("failed","parameters missing");
-    }
+function createTransaction($token,$from_address,$to_address,$method,$bitcoin_amount,$fund_amount){
+	
+    $current = getCurrentTime();
+	$bitcoin_amount = (int)$bitcoin_amount;
+	$fund_amount = (int)$fund_amount;
+
     $user_id = finduser($token);
     if ($user_id ==-1){
         return msgPack("failed","wrong_token");
@@ -70,11 +63,11 @@ function createTransaction($input){
         return msgPack("failed","it does not belongs to in this system");
     }
 
-    if ($bitcoin_amount <=0 || gettype($bitcoin_amount)!="int"){
+    if ($bitcoin_amount <=1 ){
         return msgPack("failed","wrong bitcoin amount");
     }
 
-    if ($fund_amount <=0 || gettype($fund_amount)!="int"){
+    if ($fund_amount <=0 ){
         return msgPack("failed","wrong fund amount");
     }
 
@@ -88,8 +81,9 @@ function createTransaction($input){
             return msgPack("failed","api broken");
         }
         else{
-             $amount = $fetched["status"];
+             $amount = $fetched["msg"]["balance"];
         }
+
         if ($amount<$bitcoin_amount){
             return msgPack("failed","not enough bitcoins");
         }
@@ -140,32 +134,37 @@ function listTransaction($token){
 
 function actionTransaction($token,$transaction_id,$action){
     $user_id = finduser($token);
+
     if ($user_id ==-1){
         return msgPack("failed","wrong_token");
     }
 
-    $sql = "SELECT * FROM db_bitcoin.transaction WHERE transaction_id = '$transaction_id' LIMIT 1;";
+    $sql = "SELECT * FROM db_bitcoin.transaction WHERE transaction_id = '$transaction_id' LIMIT 1 ";
     try {
         $db = new db();
         $db = $db->connect();
         $stmt = $db->query( $sql );
-        $transaction = $stmt->fetch(PDO::FETCH_OBJ);
-        
-        if (is_null($transaction)){
+        $transaction = $stmt->fetch();
+		
+
+        if ($transaction===NULL || empty($transaction) ){
             return msgPack("failed","No transaction found");
         }
+
         $db = null; // clear db object
                 
       } catch( PDOException $e ) {
         return msgPack("failed",$e);
     }
-
+	
+	
     if ($transaction["t_status"]!="requested"){
         return msgPack("failed","The transaction is ended ");
     }
     
     
     if ($action == "accept"){
+		
         if ($user_id == $transaction["to_id"]){
             
             $input_address = "";
@@ -173,12 +172,12 @@ function actionTransaction($token,$transaction_id,$action){
             $fund_amount = (int)$transaction["fund_amount"];
             $bitcoin_amount = (int)$transaction["bitcoin_amount"];
             $privateData = "";
-
+		
             if ($transaction["method"] == "buy"){
                 
                 $input_address = $transaction["to_address"];
                 $output_address = $transaction["from_address"];
-
+					
                 if (detailFund($transaction["from_id"])<$fund_amount){
                     
                     return msgPack("failed","from user do not have enough funds");
@@ -198,7 +197,7 @@ function actionTransaction($token,$transaction_id,$action){
 
                 $input_address = $transaction["from_address"];
                 $output_address = $transaction["to_address"]; 
-
+				
                 if ( detailFund($transaction["to_id"]) < $fund_amount){
                     return msgPack("failed","to user do not have enough funds");
                 }
@@ -214,12 +213,14 @@ function actionTransaction($token,$transaction_id,$action){
                     return msgPack("failed","from user do not have enough bitcoins");
                 }
             }
+			
             $fetchedmsg = findPrivate($input_address);
             if ($fetchedmsg["status"]=="failed"){
                 return $fetchedmsg;
             }
-            $privateData = $fetchedmsg["msg"]["privateData"];
 
+            $privateData = $fetchedmsg["msg"]["privateData"];
+			
             $reason=commitTransaction($input_address,$output_address,$bitcoin_amount,$privateData);
             if ($reason!="success"){
                 return msgPack("failed",$reason);
@@ -338,7 +339,7 @@ function findPrivate($addressData){
         $db = new db();
         $db = $db->connect();
         $stmt = $db->query( $sql );
-        $privateData = $stmt->fetch(PDO::FETCH_OBJ);
+        $privateData = $stmt->fetch();
         
         if (is_null($privateData)){
             return msgPack("failed","No records");

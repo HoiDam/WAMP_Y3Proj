@@ -2694,3 +2694,293 @@
 [06-04-2021 09:32:45] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setBlockIndex. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
 [06-04-2021 09:32:45] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setVsize. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
 [06-04-2021 09:32:45] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setVsize. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:20:41] BlockCypher\Core\BlockCypherHttpConnection: INFO	: POST https://api.blockcypher.com/v1/btc/test3/txs/new?token=7a66a3ce406e4871b7694b4d24abca13
+[13-04-2021 11:20:41] BlockCypher\Core\BlockCypherHttpConnection: INFO	: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[13-04-2021 11:20:42] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Request Headers 	: POST /v1/btc/test3/txs/new?token=7a66a3ce406e4871b7694b4d24abca13 HTTP/1.1, Host: api.blockcypher.com, Accept: */*, Content-Type: application/json, User-Agent: BlockCypherSDK/BlockCypher-PHP-SDK 1.5.0 (lang=PHP;v=5.6.25;bit=32;os=Windows_NT_10.0;machine=AMD64;openssl=1.0.1t;curl=7.50.1), BlockCypher-Request-Id: 654416183128401790, Content-Length: 141, , 
+[13-04-2021 11:20:42] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Request Data		: {"inputs":[{"addresses":["mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"]}],"outputs":[{"addresses":["n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"],"value":10}]}
+--------------------------------------------------------------------------------------------------------------------------------
+
+[13-04-2021 11:20:42] BlockCypher\Core\BlockCypherHttpConnection: INFO	: Response Status 	: 201
+[13-04-2021 11:20:42] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Response Headers	: HTTP/1.1 201 Created, Date: Tue, 13 Apr 2021 11:20:42 GMT, Content-Type: application/json, Content-Length: 1500, Connection: keep-alive, Set-Cookie: __cfduid=d9034cb07324b319058a7d4315815686d1618312842; expires=Thu, 13-May-21 11:20:42 GMT; path=/; domain=.blockcypher.com; HttpOnly; SameSite=Lax, Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Methods: GET, POST, PUT, DELETE, Access-Control-Allow-Origin: *, X-Ratelimit-Remaining: 192, CF-Cache-Status: DYNAMIC, cf-request-id: 096c8f6325000024d37d903000000001, Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct", Server: cloudflare, CF-RAY: 63f44e7ea95224d3-HKG, , 
+[13-04-2021 11:20:42] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Response Data 	: {
+  "tx": {
+    "block_height": -1,
+    "block_index": -1,
+    "hash": "4a2c1da0e352099ae82bf5b6aefc8cdc46b1b55af522421b7b03acef4994432b",
+    "addresses": [
+      "n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh",
+      "mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"
+    ],
+    "total": 988900,
+    "fees": 11100,
+    "size": 119,
+    "vsize": 119,
+    "preference": "medium",
+    "relayed_by": "218.253.12.22",
+    "received": "2021-04-13T11:20:42.872376964Z",
+    "ver": 1,
+    "double_spend": false,
+    "vin_sz": 1,
+    "vout_sz": 2,
+    "confirmations": 0,
+    "inputs": [
+      {
+        "prev_hash": "fdd404faedbe35d6188975f753731ab46e2763fb4b9922c0d75d70354df4a391",
+        "output_index": 1,
+        "output_value": 1000000,
+        "sequence": 4294967295,
+        "addresses": [
+          "mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"
+        ],
+        "script_type": "pay-to-pubkey-hash",
+        "age": 1970243
+      }
+    ],
+    "outputs": [
+      {
+        "value": 10,
+        "script": "76a914da78f62e554b46538d969acca00eb749ac2ff66288ac",
+        "addresses": [
+          "n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"
+        ],
+        "script_type": "pay-to-pubkey-hash"
+      },
+      {
+        "value": 988890,
+        "script": "76a9143caa4804f87c685f9ed04a783b5d05bb34a458af88ac",
+        "addresses": [
+          "mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"
+        ],
+        "script_type": "pay-to-pubkey-hash"
+      }
+    ]
+  },
+  "tosign": [
+    "92ff5b8b09175a6a3ac4c8b0726d325a56f2b5f83b9842c69441d3912b83c128"
+  ]
+}
+
+================================================================================================================================
+
+[13-04-2021 11:20:43] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setBlockIndex. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:20:43] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setBlockIndex. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:20:43] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setVsize. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:20:43] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setVsize. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:20:47] BlockCypher\Core\BlockCypherHttpConnection: INFO	: POST https://api.blockcypher.com/v1/btc/test3/txs/send?token=7a66a3ce406e4871b7694b4d24abca13
+[13-04-2021 11:20:47] BlockCypher\Core\BlockCypherHttpConnection: INFO	: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[13-04-2021 11:20:47] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Request Headers 	: POST /v1/btc/test3/txs/send?token=7a66a3ce406e4871b7694b4d24abca13 HTTP/1.1, Host: api.blockcypher.com, Accept: */*, Content-Type: application/json, User-Agent: BlockCypherSDK/BlockCypher-PHP-SDK 1.5.0 (lang=PHP;v=5.6.25;bit=32;os=Windows_NT_10.0;machine=AMD64;openssl=1.0.1t;curl=7.50.1), BlockCypher-Request-Id: 654416183128401790, Content-Length: 1330, Expect: 100-continue, , 
+[13-04-2021 11:20:47] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Request Data		: {"tx":{"block_height":-1,"block_index":-1,"hash":"4a2c1da0e352099ae82bf5b6aefc8cdc46b1b55af522421b7b03acef4994432b","addresses":["n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh","mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"],"total":988900,"fees":11100,"size":119,"vsize":119,"preference":"medium","relayed_by":"218.253.12.22","received":"2021-04-13T11:20:42.872376964Z","ver":1,"double_spend":false,"vin_sz":1,"vout_sz":2,"confirmations":0,"inputs":[{"prev_hash":"fdd404faedbe35d6188975f753731ab46e2763fb4b9922c0d75d70354df4a391","output_index":1,"output_value":1000000,"sequence":4294967295,"addresses":["mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"],"script_type":"pay-to-pubkey-hash","age":1970243}],"outputs":[{"value":10,"script":"76a914da78f62e554b46538d969acca00eb749ac2ff66288ac","addresses":["n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"],"script_type":"pay-to-pubkey-hash"},{"value":988890,"script":"76a9143caa4804f87c685f9ed04a783b5d05bb34a458af88ac","addresses":["mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"],"script_type":"pay-to-pubkey-hash"}]},"tosign":["92ff5b8b09175a6a3ac4c8b0726d325a56f2b5f83b9842c69441d3912b83c128"],"signatures":["3044022050ba3369dd7fb9bd7ee627d48e49eac591624fde4df365a44804df81de3566a5022056f582e8bcba51a345fad294515d9114cdc91ccf6831a87411049c3a90917cab"],"pubkeys":["037e332b2d652275e32cfc5b9db56d68f0eefcc238db0f25a452023f34f78f34cd"]}
+--------------------------------------------------------------------------------------------------------------------------------
+
+[13-04-2021 11:20:47] BlockCypher\Core\BlockCypherHttpConnection: INFO	: Response Status 	: 201
+[13-04-2021 11:20:47] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Response Headers	: HTTP/1.1 100 Continue, , HTTP/1.1 201 Created, Date: Tue, 13 Apr 2021 11:20:48 GMT, Content-Type: application/json, Content-Length: 1667, Connection: keep-alive, Set-Cookie: __cfduid=db2bb1905c0bbd42553f1f4d705a5018c1618312847; expires=Thu, 13-May-21 11:20:47 GMT; path=/; domain=.blockcypher.com; HttpOnly; SameSite=Lax, Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Methods: GET, POST, PUT, DELETE, Access-Control-Allow-Origin: *, X-Ratelimit-Remaining: 191, CF-Cache-Status: DYNAMIC, cf-request-id: 096c8f7974000024eb7305d000000001, Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct", Server: cloudflare, CF-RAY: 63f44ea25a6324eb-HKG, , 
+[13-04-2021 11:20:47] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Response Data 	: {
+  "tx": {
+    "block_height": -1,
+    "block_index": -1,
+    "hash": "e1166eda27964a8233e34604bf30b4edc30995a8384b5f2f557d7b7c3209ff20",
+    "addresses": [
+      "mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde",
+      "n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"
+    ],
+    "total": 988900,
+    "fees": 11100,
+    "size": 225,
+    "vsize": 225,
+    "preference": "low",
+    "relayed_by": "218.253.12.22",
+    "received": "2021-04-13T11:20:47.904600717Z",
+    "ver": 1,
+    "double_spend": false,
+    "vin_sz": 1,
+    "vout_sz": 2,
+    "confirmations": 0,
+    "inputs": [
+      {
+        "prev_hash": "fdd404faedbe35d6188975f753731ab46e2763fb4b9922c0d75d70354df4a391",
+        "output_index": 1,
+        "script": "473044022050ba3369dd7fb9bd7ee627d48e49eac591624fde4df365a44804df81de3566a5022056f582e8bcba51a345fad294515d9114cdc91ccf6831a87411049c3a90917cab0121037e332b2d652275e32cfc5b9db56d68f0eefcc238db0f25a452023f34f78f34cd",
+        "output_value": 1000000,
+        "sequence": 4294967295,
+        "addresses": [
+          "mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"
+        ],
+        "script_type": "pay-to-pubkey-hash",
+        "age": 1970243
+      }
+    ],
+    "outputs": [
+      {
+        "value": 10,
+        "script": "76a914da78f62e554b46538d969acca00eb749ac2ff66288ac",
+        "addresses": [
+          "n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"
+        ],
+        "script_type": "pay-to-pubkey-hash"
+      },
+      {
+        "value": 988890,
+        "script": "76a9143caa4804f87c685f9ed04a783b5d05bb34a458af88ac",
+        "addresses": [
+          "mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"
+        ],
+        "script_type": "pay-to-pubkey-hash"
+      }
+    ]
+  },
+  "tosign": [
+    ""
+  ]
+}
+
+================================================================================================================================
+
+[13-04-2021 11:20:47] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setBlockIndex. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:20:47] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setBlockIndex. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:20:47] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setVsize. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:20:47] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setVsize. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:23:19] BlockCypher\Core\BlockCypherHttpConnection: INFO	: POST https://api.blockcypher.com/v1/btc/test3/txs/new?token=7a66a3ce406e4871b7694b4d24abca13
+[13-04-2021 11:23:19] BlockCypher\Core\BlockCypherHttpConnection: INFO	: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[13-04-2021 11:23:20] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Request Headers 	: POST /v1/btc/test3/txs/new?token=7a66a3ce406e4871b7694b4d24abca13 HTTP/1.1, Host: api.blockcypher.com, Accept: */*, Content-Type: application/json, User-Agent: BlockCypherSDK/BlockCypher-PHP-SDK 1.5.0 (lang=PHP;v=5.6.25;bit=32;os=Windows_NT_10.0;machine=AMD64;openssl=1.0.1t;curl=7.50.1), BlockCypher-Request-Id: 2130706433654416183129982977, Content-Length: 140, , 
+[13-04-2021 11:23:20] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Request Data		: {"inputs":[{"addresses":["n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"]}],"outputs":[{"addresses":["mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"],"value":1}]}
+--------------------------------------------------------------------------------------------------------------------------------
+
+[13-04-2021 11:23:20] BlockCypher\Core\BlockCypherHttpConnection: INFO	: Response Status 	: 201
+[13-04-2021 11:23:20] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Response Headers	: HTTP/1.1 201 Created, Date: Tue, 13 Apr 2021 11:23:20 GMT, Content-Type: application/json, Content-Length: 1498, Connection: keep-alive, Set-Cookie: __cfduid=dc497be88d33c3a74523c7ee048530cfb1618312999; expires=Thu, 13-May-21 11:23:19 GMT; path=/; domain=.blockcypher.com; HttpOnly; SameSite=Lax, Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Methods: GET, POST, PUT, DELETE, Access-Control-Allow-Origin: *, X-Ratelimit-Remaining: 194, CF-Cache-Status: DYNAMIC, cf-request-id: 096c91c9b90000196f45a72000000001, Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct", Server: cloudflare, CF-RAY: 63f45255f977196f-HKG, , 
+[13-04-2021 11:23:20] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Response Data 	: {
+  "tx": {
+    "block_height": -1,
+    "block_index": -1,
+    "hash": "9ed93a94c0d89990fe62a8f87d909ecdb83eecbcdb5cf1af8110f879be448ba3",
+    "addresses": [
+      "mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde",
+      "n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"
+    ],
+    "total": 188900,
+    "fees": 11100,
+    "size": 119,
+    "vsize": 119,
+    "preference": "medium",
+    "relayed_by": "218.253.12.22",
+    "received": "2021-04-13T11:23:20.273968066Z",
+    "ver": 1,
+    "double_spend": false,
+    "vin_sz": 1,
+    "vout_sz": 2,
+    "confirmations": 0,
+    "inputs": [
+      {
+        "prev_hash": "467c9cde5a7449dc91955d3421c44e1b5d22a3faf9fac1a6833ac31376ec2be7",
+        "output_index": 0,
+        "output_value": 200000,
+        "sequence": 4294967295,
+        "addresses": [
+          "n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"
+        ],
+        "script_type": "pay-to-pubkey-hash",
+        "age": 1970112
+      }
+    ],
+    "outputs": [
+      {
+        "value": 1,
+        "script": "76a9143caa4804f87c685f9ed04a783b5d05bb34a458af88ac",
+        "addresses": [
+          "mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"
+        ],
+        "script_type": "pay-to-pubkey-hash"
+      },
+      {
+        "value": 188899,
+        "script": "76a914da78f62e554b46538d969acca00eb749ac2ff66288ac",
+        "addresses": [
+          "n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"
+        ],
+        "script_type": "pay-to-pubkey-hash"
+      }
+    ]
+  },
+  "tosign": [
+    "6691926a1499cf7b7a19dcadb5195424fa1e5e9dc18fb058502fa75e6dadd07b"
+  ]
+}
+
+================================================================================================================================
+
+[13-04-2021 11:23:20] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setBlockIndex. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:23:20] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setBlockIndex. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:23:20] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setVsize. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:23:20] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setVsize. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:23:22] BlockCypher\Core\BlockCypherHttpConnection: INFO	: POST https://api.blockcypher.com/v1/btc/test3/txs/send?token=7a66a3ce406e4871b7694b4d24abca13
+[13-04-2021 11:23:22] BlockCypher\Core\BlockCypherHttpConnection: INFO	: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[13-04-2021 11:23:23] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Request Headers 	: POST /v1/btc/test3/txs/send?token=7a66a3ce406e4871b7694b4d24abca13 HTTP/1.1, Host: api.blockcypher.com, Accept: */*, Content-Type: application/json, User-Agent: BlockCypherSDK/BlockCypher-PHP-SDK 1.5.0 (lang=PHP;v=5.6.25;bit=32;os=Windows_NT_10.0;machine=AMD64;openssl=1.0.1t;curl=7.50.1), BlockCypher-Request-Id: 2130706433654416183129982977, Content-Length: 1330, Expect: 100-continue, , 
+[13-04-2021 11:23:23] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Request Data		: {"tx":{"block_height":-1,"block_index":-1,"hash":"9ed93a94c0d89990fe62a8f87d909ecdb83eecbcdb5cf1af8110f879be448ba3","addresses":["mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde","n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"],"total":188900,"fees":11100,"size":119,"vsize":119,"preference":"medium","relayed_by":"218.253.12.22","received":"2021-04-13T11:23:20.273968066Z","ver":1,"double_spend":false,"vin_sz":1,"vout_sz":2,"confirmations":0,"inputs":[{"prev_hash":"467c9cde5a7449dc91955d3421c44e1b5d22a3faf9fac1a6833ac31376ec2be7","output_index":0,"output_value":200000,"sequence":4294967295,"addresses":["n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"],"script_type":"pay-to-pubkey-hash","age":1970112}],"outputs":[{"value":1,"script":"76a9143caa4804f87c685f9ed04a783b5d05bb34a458af88ac","addresses":["mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"],"script_type":"pay-to-pubkey-hash"},{"value":188899,"script":"76a914da78f62e554b46538d969acca00eb749ac2ff66288ac","addresses":["n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"],"script_type":"pay-to-pubkey-hash"}]},"tosign":["6691926a1499cf7b7a19dcadb5195424fa1e5e9dc18fb058502fa75e6dadd07b"],"signatures":["3045022100dffdcee832ce9264e7339b63d335316700cc887d0bda72afa8370f86491c37f302203f01cbe0489817e38d5c7ae3ed03b695592f85d786ff12bcfbf04eafcf890e1f"],"pubkeys":["023a45802109826dce63bbc7b5c3ccb5f5e16b46e5132a588702f7f4de57658920"]}
+--------------------------------------------------------------------------------------------------------------------------------
+
+[13-04-2021 11:23:23] BlockCypher\Core\BlockCypherHttpConnection: INFO	: Response Status 	: 201
+[13-04-2021 11:23:23] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Response Headers	: HTTP/1.1 100 Continue, , HTTP/1.1 201 Created, Date: Tue, 13 Apr 2021 11:23:23 GMT, Content-Type: application/json, Content-Length: 1667, Connection: keep-alive, Set-Cookie: __cfduid=daed7d4addb4c69375ac3027ebe21ba081618313002; expires=Thu, 13-May-21 11:23:22 GMT; path=/; domain=.blockcypher.com; HttpOnly; SameSite=Lax, Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Methods: GET, POST, PUT, DELETE, Access-Control-Allow-Origin: *, X-Ratelimit-Remaining: 193, CF-Cache-Status: DYNAMIC, cf-request-id: 096c91d73700002458ed286000000001, Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct", Server: cloudflare, CF-RAY: 63f4526b8fe02458-HKG, , 
+[13-04-2021 11:23:23] BlockCypher\Core\BlockCypherHttpConnection: DEBUG	: Response Data 	: {
+  "tx": {
+    "block_height": -1,
+    "block_index": -1,
+    "hash": "4fee69d9c672e497a3eea06c12f3efca48b9c775c8657ad322e25ef00959d552",
+    "addresses": [
+      "n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh",
+      "mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"
+    ],
+    "total": 188900,
+    "fees": 11100,
+    "size": 226,
+    "vsize": 226,
+    "preference": "low",
+    "relayed_by": "218.253.12.22",
+    "received": "2021-04-13T11:23:23.693663909Z",
+    "ver": 1,
+    "double_spend": false,
+    "vin_sz": 1,
+    "vout_sz": 2,
+    "confirmations": 0,
+    "inputs": [
+      {
+        "prev_hash": "467c9cde5a7449dc91955d3421c44e1b5d22a3faf9fac1a6833ac31376ec2be7",
+        "output_index": 0,
+        "script": "483045022100dffdcee832ce9264e7339b63d335316700cc887d0bda72afa8370f86491c37f302203f01cbe0489817e38d5c7ae3ed03b695592f85d786ff12bcfbf04eafcf890e1f0121023a45802109826dce63bbc7b5c3ccb5f5e16b46e5132a588702f7f4de57658920",
+        "output_value": 200000,
+        "sequence": 4294967295,
+        "addresses": [
+          "n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"
+        ],
+        "script_type": "pay-to-pubkey-hash",
+        "age": 1970112
+      }
+    ],
+    "outputs": [
+      {
+        "value": 1,
+        "script": "76a9143caa4804f87c685f9ed04a783b5d05bb34a458af88ac",
+        "addresses": [
+          "mm3ipvBgFFZB5sEKCTPAbwNBJt5fhrCBde"
+        ],
+        "script_type": "pay-to-pubkey-hash"
+      },
+      {
+        "value": 188899,
+        "script": "76a914da78f62e554b46538d969acca00eb749ac2ff66288ac",
+        "addresses": [
+          "n1S8WSD7rEeRxtxdi6iTPvjpyEAd2aEDQh"
+        ],
+        "script_type": "pay-to-pubkey-hash"
+      }
+    ]
+  },
+  "tosign": [
+    ""
+  ]
+}
+
+================================================================================================================================
+
+[13-04-2021 11:23:23] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setBlockIndex. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:23:23] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setBlockIndex. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:23:23] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setVsize. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues
+[13-04-2021 11:23:23] BlockCypher\Validation\ModelAccessorValidator: DEBUG	: Missing Accessor: BlockCypher\Api\TX:setVsize. You might be using older version of SDK. If not, create an issue at https://github.com/blockcypher/php-client/issues

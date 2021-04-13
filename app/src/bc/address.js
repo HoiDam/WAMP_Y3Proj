@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
-import Modal from '@material-ui/core/Modal';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -116,7 +115,6 @@ class AddressModal extends Component {
         return fetched
     }
 
-    // this.setState({addressInfo:data.msg}) 
     getAddressInfo = async (token,walletID)=>{
         const requestOptions={
             method: "POST",

@@ -158,7 +158,7 @@ const Daw = (props) =>{
                         ''
                     )}
             <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
+                <Typography component="h1" variant="h4">
                 💰 Funds Balance := ${infod.funds}
                 </Typography>
             </div>

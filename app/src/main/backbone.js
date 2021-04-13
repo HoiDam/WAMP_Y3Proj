@@ -174,7 +174,7 @@ export default function PersistentDrawerLeft() {
           </List>
         </Drawer>
 
-        <main
+        <main 
           className={clsx(classes.content, {
             [classes.contentShift]: open
           })}

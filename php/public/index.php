@@ -192,10 +192,22 @@ $app->post('/bc/address/delete', function (Request $req,  Response $res, $args )
 });  
 
 $app->post('/bc/transaction/create', function (Request $req,  Response $res, $args ) {
-  
-  $input = $req->getParsedBody();
-  
-  return json_encode(createTransaction($input));
+
+	try {
+		 $input = $req->getParsedBody();
+        $token = $input['token'];
+        $from_address = $input["from_address"];
+        $to_address = $input["to_address"];
+        $method = $input["method"];
+        $bitcoin_amount = $input["bitcoin_amount"];
+        $fund_amount = $input["fund_amount"];
+        
+    }
+    catch (Exception $e){
+        return msgPack("failed","parameters missing");
+    }
+	
+  return json_encode(createTransaction($token,$from_address,$to_address,$method,$bitcoin_amount,$fund_amount));
 
 });  
 
@@ -231,7 +243,7 @@ $app->add(function ($req, $res, $next) {
     return $response
             ->withHeader('Access-Control-Allow-Origin', '*')
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST');
 });
 
 

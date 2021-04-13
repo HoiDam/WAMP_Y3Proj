@@ -74,7 +74,7 @@ const Setting = (props) =>{
         <Container >
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5">
-                    Setting
+                    ⚙️ Setting
                 </Typography>
             </div>
             <Grid container spacing={5}>
