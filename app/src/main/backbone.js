@@ -107,6 +107,7 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  
 
     return (
       <div className={classes.main}>
@@ -181,19 +182,19 @@ export default function PersistentDrawerLeft() {
         >
           <div className={classes.drawerHeader} />
 
-          <Route exact path="/main">
+          <Route path="/main">
             <Redirect to="/main/home" />
           </Route>
-          <Route path="/main/home">
+          <Route exact path="/main/home">
             <Home token = {token}/>
           </Route>
-          <Route path="/main/daw">
+          <Route exact path="/main/daw">
             <Daw token = {token}/>
           </Route>
-          <Route path="/main/bas">
+          <Route exact path="/main/bas">
             <Bas token = {token}/>
           </Route>
-          <Route path="/main/setting">
+          <Route exact path="/main/setting">
             <Setting token = {token}/>
           </Route>
 

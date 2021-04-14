@@ -11,7 +11,8 @@ import Error from '../error.js'
 
 function App() {
   return (
-    <Router >
+    <Router basename="/app" >
+     {/* <Router > */}
       <Switch>
         <Route exact path="/">
           <Redirect to="/login" />

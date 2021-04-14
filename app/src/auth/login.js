@@ -74,6 +74,7 @@ class Login extends Component {
       if (isSuccess=="success") {
         this.state.login=true
         setCookie('token', this.props.response.login.response.msg, 2);
+        console.log(this.props.response.login.response.msg)
       }
     }
     const {classes} = this.props;
@@ -134,7 +135,7 @@ class Login extends Component {
                       </Link>
                     </Grid>
                     <Grid item>
-                      <Link href="/register" variant="body2">
+                      <Link href="/app/register" variant="body2">
                         {"Don't have an account? Sign Up"}
                       </Link>
                     </Grid>
