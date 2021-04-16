@@ -18,6 +18,8 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import Warning from '../utils/warning.js'
+import Copyright from '../copyright.js' 
 const useStyles = theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -43,7 +45,10 @@ class Login extends Component {
   constructor(props) {
     super(props)
     this.state={
-      login:false
+      login:false,
+      alertSeverity:'',
+      alertMessage:'',
+      showAlert:false 
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -67,14 +72,18 @@ class Login extends Component {
 
   render() {
     setCookie('token',"",1)
-    let isSuccess="failed", message;
+    let isSuccess, message;
     if (this.props.response.login.hasOwnProperty('response')) {
       isSuccess = this.props.response.login.response.status;
       message = this.props.response.login.response.msg;
       if (isSuccess=="success") {
         this.state.login=true
         setCookie('token', this.props.response.login.response.msg, 2);
-        console.log(this.props.response.login.response.msg)
+        
+      }else if (isSuccess=="failed"){
+        this.state.showAlert=true; 
+        this.state.alertMessage=message;
+        this.state.alertSeverity="error";
       }
     }
     const {classes} = this.props;
@@ -84,6 +93,11 @@ class Login extends Component {
         {!this.state.login ? <div></div> : <Redirect to='/main' />}
           <Container component="main" maxWidth="xs">
               <CssBaseline />
+              {this.state.showAlert ? (
+                        <Warning severity={this.state.alertSeverity} message={this.state.alertMessage} />
+                    ) : (
+                        ''
+                    )}
               <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                 </Avatar>
@@ -142,7 +156,8 @@ class Login extends Component {
                   </Grid>
                 </form>
               </div>
-              <Box mt={8}>
+              <Box mt={20}>
+                <Copyright />
               </Box>
             </Container>
         </div>

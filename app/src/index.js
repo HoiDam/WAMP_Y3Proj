@@ -11,8 +11,8 @@ import * as serviceWorker from './serviceWorker';
 var myStorage = window.localStorage;
 
 // localStorage.setItem('BackendURL', 'http://localhost:80/php/public');
-localStorage.setItem('BackendURL', 'http://'+window.location.hostname+'/php/public');
-localStorage.setItem('FrontendURL', 'http://localhost:3000');
+localStorage.setItem('BackendURL', 'https://'+window.location.hostname+'/php/public');
+localStorage.setItem('FrontendURL', 'https://localhost:3000');
 console.log(localStorage.getItem("BackendURL"))
 const store = configureStore();
 

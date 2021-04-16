@@ -37,6 +37,7 @@ const Daw = (props) =>{
          root: {
             minWidth: 300,
             marginBottom: theme.spacing(2),
+            minHeight :600
           },    
           title: {
               fontSize: 30,
@@ -64,7 +65,7 @@ const Daw = (props) =>{
           };
           await fetch(localStorage.getItem("BackendURL")+"/user/info", requestOptions)
           .then(res => res.json())
-          .then(data=> {console.log(data) ; setInfod(data.msg)})
+          .then(data=> {setInfod(data.msg)})
           .catch(error => console.log(error))
     }
 

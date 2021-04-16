@@ -20,6 +20,7 @@ const Home = (props) =>{
         root: {
             Width: 500,
             marginBottom: theme.spacing(2),
+            minHeight :600
           },    
           title: {
               fontSize: 30,
@@ -48,7 +49,7 @@ const Home = (props) =>{
               };
               await fetch(localStorage.getItem("BackendURL")+"/user/info", requestOptions)
               .then(res => res.json())
-              .then(data=> {console.log(data) ; setInfo(data) ; setNickname(data.msg.nickname);})
+              .then(data=> {setInfo(data) ; setNickname(data.msg.nickname);})
               .catch(error => console.log(error))
         }
         getUserInfo(token)        

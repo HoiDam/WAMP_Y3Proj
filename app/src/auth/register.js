@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import {Link ,Redirect } from 'react-router-dom'
 
 import { registerUserAction } from '../actions/authenticationActions';
+import { getCookie, setCookie } from '../utils/cookies';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -18,6 +16,8 @@ import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles';
 
 import Warning from '../utils/warning.js'
+import Copyright from '../copyright.js' 
+
 
 const useStyles = theme => ({
     paper: {
@@ -45,7 +45,8 @@ class Register extends Component {
         this.state={
             alertSeverity:'',
             alertMessage:'',
-            showAlert:false 
+            showAlert:false ,
+            emailC:""
           }
       }
   onHandleRegistration = (event) => {
@@ -59,7 +60,7 @@ class Register extends Component {
     let address = event.target[8].value;
 
     if (password!=c_password){
-        this.setState({  showAlert:true ,alertMessage:"Password not match", alertSeverity:"error"});
+        this.setState({  showAlert:true ,alertMessage:"Password not match", alertSeverity:"error",emailC:email});
     }
     else if (!re.test(email)){
         this.setState({  showAlert:true ,alertMessage:"Wrong Email Format", alertSeverity:"error"});
@@ -69,13 +70,13 @@ class Register extends Component {
         const data = {
         email,nickname, password ,address
         };
-        console.log(data)
         this.props.dispatch(registerUserAction(data));
     
     }
   }
 
   render() {
+    setCookie('token',"",1)
     let message, isSuccess;
     if (this.props.response.register.hasOwnProperty('response')) {
         isSuccess = this.props.response.register.response.status;
@@ -100,7 +101,16 @@ class Register extends Component {
     return (
       <div>
         <Container component="main" maxWidth="xs">
+
             <CssBaseline />
+            {this.state.emailC=="" ? <div></div> : 
+            <div>
+                <Redirect to={{
+                pathname: '/register/confirm',
+                state: { emailC: this.state.emailC }
+                }} />
+            </div>
+            }
             {this.state.showAlert ? (
                         <Warning severity={this.state.alertSeverity} message={this.state.alertMessage} />
                     ) : (
@@ -190,6 +200,9 @@ class Register extends Component {
                 </Grid>
                 </form>
             </div>
+            <Box mt={20}>
+                <Copyright />
+            </Box>
             </Container>
       </div>
     )

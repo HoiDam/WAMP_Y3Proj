@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    backgroundColor: "#315f42" //Grey
+    backgroundColor: "#242526" //Grey
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -52,11 +52,10 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0
-    
   },
   drawerPaper: {
     width: drawerWidth,
-    background: "#eed59a" //Grey
+    background: "#e4e6eb" //Grey
   },
   drawerHeader: {
     display: "flex",
@@ -72,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen
     }),
     marginLeft: -drawerWidth,
-    Color: "#424242" //Grey
+    background: "#f5f5f5" //Grey
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -98,6 +97,7 @@ export default function PersistentDrawerLeft() {
   const handleOnclick = ()=>{
     setCookie('token',"",1)
     setRedir(true)
+    
   }
 
   const handleDrawerOpen = () => {
@@ -111,7 +111,7 @@ export default function PersistentDrawerLeft() {
 
     return (
       <div className={classes.main}>
-         { redir ? (<Redirect to="/register"/>) : <div></div> }
+         { redir ? (<Redirect to="/"/>) : <div></div> }
         <AppBar
           position="fixed"
           className={clsx(classes.appBar, {

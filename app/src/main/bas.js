@@ -38,6 +38,7 @@ const Bas = (props) =>{
     const useStyles = makeStyles((theme) => ({
         root: {
            marginBottom: theme.spacing(2),
+           minHeight :500
          },
          title: {
             fontSize: 30,
@@ -68,7 +69,7 @@ const Bas = (props) =>{
         };
         await fetch(localStorage.getItem("BackendURL")+"/user/info", requestOptions)
         .then(res => res.json())
-        .then(data=> {console.log(data) ; setInfod(data.msg)})
+        .then(data=> { setInfod(data.msg)})
         .catch(error => console.log(error))
     }
     const getTransactionInfo = async (token)=>{
@@ -79,7 +80,7 @@ const Bas = (props) =>{
         };
         await fetch(localStorage.getItem("BackendURL")+"/bc/transaction/list", requestOptions)
         .then(res => res.json())
-        .then(data=> {console.log(data) ; setTransaction(data.msg)})
+        .then(data=> { setTransaction(data.msg)})
         .catch(error => console.log(error))
     }
 
@@ -100,7 +101,7 @@ const Bas = (props) =>{
         };
         const fetched = await fetch(localStorage.getItem("BackendURL")+"/bc/address/detail", requestOptions)
         .then(res => res.json())
-        .then(data=> {console.log(data) ; return data})
+        .then(data=> { return data})
         .catch(error => console.log(error))
         if (fetched.msg.hasOwnProperty('balance')) {
             setShowAlert(false)
@@ -134,10 +135,9 @@ const Bas = (props) =>{
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify({"token":token,"from_address":from_address,"to_address":to_address,"bitcoin_amount":bitcoin_amount,"fund_amount":fund_amount,"method":method})
         };
-        console.log(requestSetting)
         const fetched = await fetch(localStorage.getItem("BackendURL")+"/bc/transaction/create", requestSetting)
         .then(res => res.json())
-        .then(data=> {console.log(data) ; return data})
+        .then(data=> {return data})
         .catch(error => console.log(error))
         if(fetched.status=="success"){
             setShowAlert(false)
