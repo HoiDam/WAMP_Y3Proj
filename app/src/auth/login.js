@@ -18,6 +18,8 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import Recap from "./recap.js";
+
 import Warning from '../utils/warning.js'
 import Copyright from '../copyright.js' 
 const useStyles = theme => ({
@@ -48,7 +50,8 @@ class Login extends Component {
       login:false,
       alertSeverity:'',
       alertMessage:'',
-      showAlert:false 
+      showAlert:false ,
+      recapValue:false,
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -66,8 +69,17 @@ class Login extends Component {
     const data = {
       email, password
     };
+    // console.log(this.state.recapValue)
+    if (this.state.recapValue==false){
+      this.setState({showAlert:true,alertMessage:"Wrong recaptcha. You are a bot.",alertSeverity:"error"})
+    }else{
+      this.props.dispatch(loginUserAction(data));
+    }
     
-    this.props.dispatch(loginUserAction(data));
+  }
+
+  callbackFunction = async () =>{
+    this.setState({recapValue:true})
   }
 
   render() {
@@ -133,6 +145,11 @@ class Login extends Component {
                     control={<Checkbox value="remember" color="primary" />}
                     label="Remember me"
                   />
+                  <Box mt={2} mb={2}>
+                      <Recap parentCallback = {this.callbackFunction}>
+
+                      </Recap>
+                  </Box>
                   <Button
                     type="submit"
                     fullWidth
@@ -142,6 +159,7 @@ class Login extends Component {
                   >
                     Log In
                   </Button>
+                  
                   <Grid container>
                     <Grid item xs>
                       <Link href="#" variant="body2">

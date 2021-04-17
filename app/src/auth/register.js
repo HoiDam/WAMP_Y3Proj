@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link ,Redirect } from 'react-router-dom'
+import {Redirect } from 'react-router-dom'
 
 import { registerUserAction } from '../actions/authenticationActions';
 import { getCookie, setCookie } from '../utils/cookies';
@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -17,7 +18,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Warning from '../utils/warning.js'
 import Copyright from '../copyright.js' 
-
+import Recap from "./recap.js";
 
 const useStyles = theme => ({
     paper: {
@@ -46,7 +47,8 @@ class Register extends Component {
             alertSeverity:'',
             alertMessage:'',
             showAlert:false ,
-            emailC:""
+            emailC:"",
+            recapValue:false,
           }
       }
   onHandleRegistration = (event) => {
@@ -70,9 +72,15 @@ class Register extends Component {
         const data = {
         email,nickname, password ,address
         };
+        if (this.state.recapValue==false){
+            this.setState({showAlert:true,alertMessage:"Wrong recaptcha. You are a bot.",alertSeverity:"error"})
+          }else{
         this.props.dispatch(registerUserAction(data));
-    
+          }
     }
+  }
+  callbackFunction = async () =>{
+    this.setState({recapValue:true})
   }
 
   render() {
@@ -182,6 +190,11 @@ class Register extends Component {
                     </Grid>
                     
                 </Grid>
+                <Box mt={2}>
+                      <Recap parentCallback = {this.callbackFunction}>
+
+                      </Recap>
+                </Box>
                 <Button
                     type="submit"
                     fullWidth
