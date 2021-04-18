@@ -47,7 +47,7 @@ class Register extends Component {
             alertSeverity:'',
             alertMessage:'',
             showAlert:false ,
-            emailC:"",
+            emailC:false,
             recapValue:false,
           }
       }
@@ -62,7 +62,7 @@ class Register extends Component {
     let address = event.target[8].value;
 
     if (password!=c_password){
-        this.setState({  showAlert:true ,alertMessage:"Password not match", alertSeverity:"error",emailC:email});
+        this.setState({  showAlert:true ,alertMessage:"Password not match", alertSeverity:"error"});
     }
     else if (!re.test(email)){
         this.setState({  showAlert:true ,alertMessage:"Wrong Email Format", alertSeverity:"error"});
@@ -93,14 +93,17 @@ class Register extends Component {
             this.state={
                 alertSeverity:'error',
                 alertMessage:message,
-                showAlert:true 
+                showAlert:true,
+                emailC:false
+
               }
         }
         else if (isSuccess=="success") {
             this.state={
                 alertSeverity:'success',
                 alertMessage:message,
-                showAlert:true 
+                showAlert:true,
+                emailC:true
               }
             
         }
@@ -111,7 +114,7 @@ class Register extends Component {
         <Container component="main" maxWidth="xs">
 
             <CssBaseline />
-            {this.state.emailC=="" ? <div></div> : 
+            {this.state.emailC==false ? <div></div> : 
             <div>
                 <Redirect to={{
                 pathname: '/register/confirm',

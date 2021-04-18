@@ -4,7 +4,7 @@ const Realtime = ()=>{
         <div>
             <div><iframe src="https://widget.coinlib.io/widget?type=chart&amp;theme=light&amp;coin_id=859&amp;pref_coin_id=1505" width="100%" height="536px" frameborder="0" marginwidth="0" marginheight="0" scrolling="auto"></iframe></div>
             <div><a href="https://coinlib.io" target="_blank">Cryptocurrency Prices</a>&nbsp;by Coinlib</div>
-        </div>
+        </div>      
     )
 }
 
