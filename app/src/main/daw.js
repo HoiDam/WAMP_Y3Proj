@@ -122,31 +122,37 @@ const Daw = (props) =>{
         const data = {
         token,amount,method
         };
-
-        setWithdrawled(amount)
-
-        const LOGIN_API_ENDPOINT = localStorage.getItem("BackendURL")+"/user/funds/edit";
-        const requestOptions={
-            method: "POST",
-            headers: {'Content-Type': 'application/json'},
-            body:JSON.stringify(data)
-        };
-        const prom  = await fetch(LOGIN_API_ENDPOINT, requestOptions)
-            .then(response => {
-                return response.json()
-            })
-
-        if (prom["status"]=="success"){
+        if (amount>infod.funds){
             setShowAlert(true)
-            setAlertMessage(prom["msg"])
-            setAlertSeverity("success")
-            getUserInfo(token) 
-            setWdsuccess(true)
-        }
-        else if(prom["status"]=="failed"){
-            setShowAlert(true)
-            setAlertMessage(prom["msg"])
+            setAlertMessage("Not enough funds")
             setAlertSeverity("error")
+        }else{
+
+            setWithdrawled(amount)
+
+            const LOGIN_API_ENDPOINT = localStorage.getItem("BackendURL")+"/user/funds/edit";
+            const requestOptions={
+                method: "POST",
+                headers: {'Content-Type': 'application/json'},
+                body:JSON.stringify(data)
+            };
+            const prom  = await fetch(LOGIN_API_ENDPOINT, requestOptions)
+                .then(response => {
+                    return response.json()
+                })
+
+            if (prom["status"]=="success"){
+                setShowAlert(true)
+                setAlertMessage(prom["msg"])
+                setAlertSeverity("success")
+                getUserInfo(token) 
+                setWdsuccess(true)
+            }
+            else if(prom["status"]=="failed"){
+                setShowAlert(true)
+                setAlertMessage(prom["msg"])
+                setAlertSeverity("error")
+            }
         }
         
     }

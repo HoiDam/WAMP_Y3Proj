@@ -11,7 +11,7 @@ const Realtime = ()=>{
 const News =()=>{
     return (
         <div>
-            <iframe scrolling="no" allowtransparency="true" src="https://cryptopanic.com/widgets/news/?bg_color=FFFFFF&amp;font_family=sans&amp;header_bg_color=30343B&amp;header_text_color=FFFFFF&amp;link_color=0091C2&amp;news_feed=recent&amp;text_color=333333&amp;title=Latest%20News" width="100%" height="350px" frameborder="0"></iframe>
+            <iframe scrolling="no" allowtransparency="true" src="https://cryptopanic.com/widgets/news/?bg_color=FFFFFF&amp;font_family=sans&amp;header_bg_color=30343B&amp;header_text_color=FFFFFF&amp;link_color=0091C2&amp;news_feed=recent&amp;text_color=333333&amp;title=Latest%20News" width="100%" height="500px" frameborder="0"></iframe>
         </div>
     )
 }

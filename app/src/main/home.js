@@ -20,7 +20,7 @@ const Home = (props) =>{
         root: {
             Width: 500,
             marginBottom: theme.spacing(2),
-            minHeight :600
+            minHeight :700
           },    
           title: {
               fontSize: 30,

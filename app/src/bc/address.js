@@ -5,11 +5,11 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { DataGrid } from '@material-ui/data-grid';
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
 
 const ObjectsToCsv = require('objects-to-csv');
 
@@ -19,7 +19,8 @@ class AddressModal extends Component {
       super(props)
       this.state={
           open:false,
-          addressInfo:null
+          addressInfo:null,
+          addOpen:false
       }
       this.handleOpen = this.handleOpen.bind(this)
       this.handleClose = this.handleClose.bind(this)
@@ -63,18 +64,7 @@ class AddressModal extends Component {
         },
     ];
 
-    addAddress = async (token,walletID)=>{
-        const requestOptions={
-            method: "POST",
-            headers: {'Content-Type': 'application/json'},
-            body:JSON.stringify({"token":token,"wallet_user_count":walletID})
-          };
-        await fetch(localStorage.getItem("BackendURL")+"/bc/address/add", requestOptions)
-        .then(res => res.json())
-        .then(data=> {console.log(data) ;})
-        .catch(error => console.log(error))
-        await this.getAddressInfo(this.props.token,this.props.walletID)
-    }
+  
     deleteAddress = async (address)=>{
         const requestOptions={
             method: "POST",
@@ -150,8 +140,27 @@ class AddressModal extends Component {
         this.props.parentCallback();
     };
 
+    addClose = ()=>{
+        this.setState({addOpen:false});
+    }
+    handleSubmit =async(event)=>{
+        event.preventDefault();
+        const requestOptions={
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify({"token":this.props.token , "wallet_user_count":this.props.walletID , "address":event.target[0].value , "private":event.target[2].value , "public":event.target[4].value , "wif":event.target[6].value})
+          };
+        await fetch(localStorage.getItem("BackendURL")+"/bc/address/add", requestOptions)
+        .then(res => res.json())
+        .then(data=> {console.log(data) ;})
+        .catch(error => console.log(error))
+        await this.getAddressInfo(this.props.token,this.props.walletID)
+        this.setState({addOpen:false})
+    }
+
     render(){
         return(
+            <div>
             <Dialog
                 open={this.props.open}
                 onClose={this.handleClose}
@@ -169,7 +178,7 @@ class AddressModal extends Component {
                                 fullWidth
                                 variant="contained"
                                 color="primary"
-                                onClick = {()=>{this.addAddress(this.props.token,this.props.walletID)}}
+                                onClick = {()=>{this.setState({addOpen:true})}}
                                 >
                                 Add Address
                                 </Button>
@@ -194,7 +203,80 @@ class AddressModal extends Component {
                 
                 </DialogActions>
             </Dialog>
+            <Dialog
+                open={this.state.addOpen}
+                onClose={this.addClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <DialogTitle id="simple-modal-title">{`Add Address`}</DialogTitle>
+                    <DialogContent>
+                        <form onSubmit={this.handleSubmit}>
+                            <Grid container direction="row" spacing="2"> 
+                                <Grid item xs={12}>
+                                    <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="address"
+                                    label="Bitcoin Address"
+                                    name="address"
+                                    autoFocus
+                                    /> 
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="private"
+                                    label="Private key"
+                                    name="private"
+                                    autoFocus
+                                    /> 
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="public"
+                                    label="Public key"
+                                    name="public"
+                                    autoFocus
+                                    /> 
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="wif"
+                                    label="WIF"
+                                    name="wif"
+                                    autoFocus
+                                    /> 
+                                </Grid>
+                                                                    
+                                <Grid item xs={12} >
+                                    <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    size = "large"
+                                    fullWidth
+                                    >
+                                        Submit
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </DialogContent>
+            </Dialog>
+            </div>
         )
     }
 }
 export default AddressModal
+
+// ()=>{this.addAddress(this.props.token,this.props.walletID)}
