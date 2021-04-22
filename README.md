@@ -36,7 +36,7 @@ Pdf version is also uploaded
 
 ![](RackMultipart20210422-4-1m05qhy_html_e6c8e79dab06b49.png)
 
-1. Backend
+## 2. Backend
   1. Backend Structure
 
 - Done on Mar 15
@@ -82,7 +82,7 @@ The function will be called when the parameters is valid
 
 ![](RackMultipart20210422-4-1m05qhy_html_4b96aa6791c2ec01.gif)/function/blockcypher.php ![](RackMultipart20210422-4-1m05qhy_html_1b33580b65c47cfa.png)
 
-## 2. Frontend
+## 3. Frontend
   1. Frontend Structure
 
 - Done at Apr 5
@@ -342,7 +342,7 @@ go watch wallet address binding 3
 
 ![](RackMultipart20210422-4-1m05qhy_html_f5f7ccc23269b7d2.png)
 
-## 4. Security
+## 5. Security
   1. Security (pfsense)
 
 - Only port forward 443 in
@@ -428,7 +428,7 @@ Adding the content type
 
 Fix 3 : Remove library viewable to public
 
-## 5. Difficulties encountered
+## 6. Difficulties encountered
 
 Difficulty 1 : Blockcypher php library deprecated
 
