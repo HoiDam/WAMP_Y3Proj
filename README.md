@@ -331,7 +331,7 @@ go watch wallet address binding 3
 
 ![](RackMultipart20210422-4-1m05qhy_html_38a78f1f32482c8c.png)
 
-## 3. Infrastructure
+## 4. Infrastructure
 
 - Your public IP 218.253.12.22
 - Exposed Kali Attacker VM SSH port at public (if you changed from 22/tcp to something else) 22
