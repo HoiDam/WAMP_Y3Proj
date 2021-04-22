@@ -1,11 +1,12 @@
 # WAMP_Y3Proj
 # Final Report
- Bitcoin Exchange Platform
+# Bitcoin Exchange Platform
 
-
+---
 ## 04/2021
 
-##Content
+---
+## Content
 
 1. Database structure
 
@@ -22,7 +23,7 @@
 Sources Code :[https://github.com/HoiDam/WAMP\_Y3Proj](https://github.com/HoiDam/WAMP_Y3Proj)
 
 Pdf version is also uploaded
-
+---
 ## 1. Database Structure
 
 - Done at Mar 8
